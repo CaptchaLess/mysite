@@ -19,5 +19,8 @@ from checkcode import views as my_views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-	url(r'^checkcode/',my_views.checkcode),
+    url(r'^captchaless/yjs/$', my_views.yjs),
+    url(r'^captchaless/mis/$', my_views.mis),
+    url(r'^captchaless/epc/$', my_views.epc),
+    url(r'^captchaless/weibo/$', my_views.weibo),
 ]
