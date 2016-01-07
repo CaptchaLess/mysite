@@ -44,7 +44,7 @@ def makePrediction_yjs(img_test):
             dist[j,i] = (dic^subImg).sum()
             j += 1   
     result = dist.argmin(axis=0)
-    checkcode = repr(result)
+    checkcode = str(result[0])+str(result[1])+str(result[2])+str(result[3])
     return checkcode
     
     

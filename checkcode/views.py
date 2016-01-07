@@ -9,37 +9,39 @@ from PIL import Image
 from django.http import HttpResponseRedirect
 
 
-def yjs(request):
+def yjs_epc(request):
     image_url = request.GET['url']
-    # image_url = "http://yjs.ustc.edu.cn/checkcode.asp"
-    result = prcessor(image_url)
-    # TODO
-    return HttpResponse(result)
+    result = processor(image_url)
+
+    response = HttpResponse(result)
+    response['Access-Control-Allow-Origin'] = '*'
+    return response
 
 
 def mis(request):
     image_url = request.GET['url']
-    result = prcessor(image_url)
-    return HttpResponse(result)
+    result = processor(image_url)
 
-
-def epc(request):
-    image_url = request.GET['url']
-    result = prcessor(image_url)
-    return HttpResponse(result)
-
+    response = HttpResponse(result)
+    response['Access-Control-Allow-Origin'] = '*'
+    return response
 
 def weibo(request):
     image_url = request.GET['url']
-    result = prcessor(image_url)
-    return HttpResponse(result)
+    result = processor(image_url)
+
+    response = HttpResponse(result)
+    response['Access-Control-Allow-Origin'] = '*'
+    return response
 
 
-def prcessor(_url):
-    r = requests.get(_url)
-    with open('test', 'wb') as data:
-        data.write(r.content)
-        data.close()
-    img_test = Image.open("test")
+def processor(_url):
+    _url = _url.replace(' ', '+')
+    #assert False
+    f = open('test', 'wb')
+    f.write(_url.decode('base64'))
+    f.close()
+    #assert False
+    img_test = Image.open('test')
     _result = tests.makePrediction_yjs(img_test)
     return _result
