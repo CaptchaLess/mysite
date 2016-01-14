@@ -2,6 +2,8 @@
 from django.http import HttpResponse
 import requests
 import tests
+from CL_algorithm import *
+import mis_test
 from PIL import Image
 # Create your views here
 # process the checkcode function
@@ -20,7 +22,7 @@ def yjs_epc(request):
 
 def mis(request):
     image_url = request.GET['url']
-    result = processor(image_url)
+    result = processor_mis(image_url)
 
     response = HttpResponse(result)
     response['Access-Control-Allow-Origin'] = '*'
@@ -43,5 +45,22 @@ def processor(_url):
     f.close()
     #assert False
     img_test = Image.open('test')
-    _result = tests.makePrediction_yjs(img_test)
+    yjs_epc = YJS_EPC()
+    _result = yjs_epc.makePrediction_yjs(img_test)
     return _result
+
+def processor_mis(_url):
+    mis_alogrithm = MIS()
+    _url = _url.replace(' ', '+')
+    #assert False
+    f = open('mis', 'wb')
+    f.write(_url.decode('base64'))
+    f.close()
+    #assert False
+    img_test = Image.open('mis')
+    code_list = mis_test.split_codes(img_test)
+    #assert False
+    _result = mis_alogrithm.makePrediction_mis(code_list)
+    return _result 
+	
+	
