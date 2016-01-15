@@ -3,7 +3,7 @@ from django.http import HttpResponse
 import requests
 import tests
 from CL_algorithm import *
-import mis_test
+import mis_test5
 from PIL import Image
 # Create your views here
 # process the checkcode function
@@ -58,9 +58,11 @@ def processor_mis(_url):
     f.close()
     #assert False
     img_test = Image.open('mis')
-    code_list = mis_test.split_codes(img_test)
+    code_list = mis_test5.split_codes(img_test)
+    list_len= len(code_list[0])
+    list_type = type(code_list[0])
     #assert False
-    _result = mis_alogrithm.makePrediction_mis(code_list)
+    _result = mis_alogrithm.makePrediction_mis_test(code_list)
     return _result 
 	
 	
