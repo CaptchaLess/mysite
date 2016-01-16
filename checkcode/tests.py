@@ -5,7 +5,7 @@ Created on Wed Jan  6 16:57:58 2016
 @author: pjh
 """
 
-from PIL import Image
+import Image
 import numpy as np
 
 

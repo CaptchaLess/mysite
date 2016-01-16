@@ -4,7 +4,7 @@ import requests
 import tests
 from CL_algorithm import *
 import mis_test5
-from PIL import Image
+import Image
 # Create your views here
 # process the checkcode function
 
