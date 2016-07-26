@@ -1,3 +1,6 @@
 *.pyc
 test
 *.swp
+*.jpg
+*.p
+build
