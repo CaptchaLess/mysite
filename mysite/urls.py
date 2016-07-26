@@ -22,5 +22,6 @@ urlpatterns = [
     url(r'^captchaless/yjs/$', my_views.yjs_epc),
     url(r'^captchaless/mis/$', my_views.mis),
     url(r'^captchaless/epc/$', my_views.yjs_epc),
+    url(r'^captchaless/lib/$', my_views.lib),
     url(r'^captchaless/weibo/$', my_views.weibo),
 ]

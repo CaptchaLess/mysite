@@ -2,5 +2,6 @@
 test
 *.swp
 *.jpg
+*.png
 *.p
 build

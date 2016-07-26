@@ -42,6 +42,8 @@ class YJS_EPC:
         Dict = self.__getTemplate_yjs()
         dist = np.zeros((10,4))
         img_test = np.array(img_test.convert('L'))>128
+#        img_test_shape = img_test.shape
+#        assert False
         for i in range(4):
             subImg = img_test[:,i*10:(i+1)*10]
             j = 0
@@ -50,6 +52,35 @@ class YJS_EPC:
                 j += 1   
         result = dist.argmin(axis=0)
         checkcode = ''.join([str(e) for e in result])
+        return checkcode
+
+class LIB:
+    def getTemplate(self):
+        dict = []
+        label = []
+        for i in range(0,10):
+            imgData = np.load('templates_binary/'+str(i)+'.npy')
+            dict.append(imgData)
+            label.append(str(i))
+
+        return (dict, label)
+
+    def predict(self, img):
+        (dict, label) = self.getTemplate()
+        splitLines = [4,16,28,40,52]
+        distance = np.zeros((10,4))
+        for i in range(4):
+            box = [splitLines[i], 0, splitLines[i+1],36]
+            subImg = img.crop(box)
+            subImgData = np.array(subImg.convert('L'))> 128
+
+            j = 0
+            for eachTemplate in dict:
+                distance[j,i] = (eachTemplate ^ subImgData).sum()
+                j += 1
+
+        result = distance.argmax(axis=0)
+        checkcode = ''.join(str(e) for e in result)
         return checkcode
 
 class MIS:
